@@ -2,7 +2,7 @@
 // Paste this into script.google.com and redeploy as Web App.
 // It sends an email to you AND saves a copy to the sheet on every submission.
 
-const NOTIFY_EMAIL = 'contact@rallyppc.com';
+const NOTIFY_EMAIL = 'dkp99984@gmail.com';
 const SHEET_NAME   = 'RSVPs';
 
 function doPost(e) {
