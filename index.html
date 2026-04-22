@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hinal & Deep — Shubh Vivah RSVP</title>
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Lato:wght@300;400&display=swap');
 
@@ -503,12 +502,7 @@
   </div>
 
   <script>
-    // ── EmailJS config — fill these in after setup ──
-    const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';
-    const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';
-    const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
-
-    emailjs.init(EMAILJS_PUBLIC_KEY);
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzYv0M7XAfnM7TQ2W75cEhhEseQZRUD7FZ_TJZcpFvAy1-2DDofTBkydp9eLTNF-dz0/exec';
 
     // Show / hide guest counter
     document.querySelectorAll('input[name="attendance"]').forEach(radio => {
@@ -566,7 +560,7 @@
       submitBtn.innerHTML = '<span class="spinner"></span>Sending…';
 
       const templateParams = {
-        from_name:   name,
+        full_name:   name,
         email:       email || 'Not provided',
         phone:       phone || 'Not provided',
         attendance:  attending ? 'Attending' : 'Not Attending',
@@ -576,7 +570,12 @@
       };
 
       try {
-        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
+        await fetch(SCRIPT_URL, {
+          method:  'POST',
+          mode:    'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify(templateParams)
+        });
         showSuccess(name, attending, count);
       } catch (err) {
         submitBtn.disabled = false;
