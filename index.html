@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hinal & Deep — Shubh Vivah RSVP</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Lato:wght@300;400&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:    #9b1c1c;
+      --maroon: #7a0d0d;
+      --gold:   #c8972a;
+      --saffron:#e07b20;
+      --cream:  #fdf6ec;
+      --light:  #fef9f2;
+      --text:   #2d1a0e;
+      --muted:  #7a4f2e;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--cream);
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ── Decorative top border ── */
+    .top-band {
+      width: 100%;
+      height: 8px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--red) 0px, var(--red) 20px,
+        var(--gold) 20px, var(--gold) 40px,
+        var(--saffron) 40px, var(--saffron) 60px,
+        var(--gold) 60px, var(--gold) 80px
+      );
+    }
+
+    /* ── Hero ── */
+    .hero {
+      width: 100%;
+      background: linear-gradient(160deg, #7a0d0d 0%, #9b1c1c 45%, #b52020 100%);
+      text-align: center;
+      padding: 50px 24px 44px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Mandala / lotus watermark */
+    .hero::before {
+      content: '🪷';
+      position: absolute;
+      font-size: 260px;
+      opacity: 0.05;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .om-symbol {
+      font-family: 'Tiro Devanagari Sanskrit', serif;
+      font-size: clamp(28px, 5vw, 42px);
+      color: var(--gold);
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+      display: block;
+    }
+    .ganesh-line {
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,210,120,0.75);
+      margin-bottom: 18px;
+    }
+
+    .hero-names {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(40px, 8vw, 74px);
+      font-weight: 300;
+      color: #fff;
+      letter-spacing: 2px;
+      line-height: 1.1;
+    }
+    .hero-amp {
+      font-size: 0.6em;
+      font-style: italic;
+      color: var(--gold);
+      vertical-align: middle;
+      margin: 0 14px;
+    }
+
+    .divider-ornament {
+      margin: 16px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: var(--gold);
+      font-size: 18px;
+      opacity: 0.85;
+    }
+    .divider-ornament::before,
+    .divider-ornament::after {
+      content: '';
+      flex: 1;
+      max-width: 80px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold));
+    }
+    .divider-ornament::after {
+      background: linear-gradient(to left, transparent, var(--gold));
+    }
+
+    .hero-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(14px, 2.8vw, 20px);
+      font-style: italic;
+      color: rgba(255,240,210,0.9);
+      letter-spacing: 0.5px;
+      margin-bottom: 28px;
+    }
+
+    .event-details {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px 36px;
+    }
+    .detail-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(200,151,42,0.3);
+      border-radius: 4px;
+      padding: 12px 20px;
+      min-width: 140px;
+    }
+    .detail-icon { font-size: 18px; }
+    .detail-label {
+      font-size: 9px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .detail-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: #fff;
+    }
+
+    /* ── Phera strip ── */
+    .phera-strip {
+      width: 100%;
+      background: var(--gold);
+      text-align: center;
+      padding: 9px 16px;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--maroon);
+      font-weight: 400;
+    }
+
+    /* ── Card ── */
+    .card {
+      background: #fff;
+      border: 1px solid #e8d2b0;
+      border-top: 3px solid var(--red);
+      border-radius: 2px;
+      box-shadow: 0 6px 40px rgba(100,20,20,0.1);
+      max-width: 640px;
+      width: calc(100% - 40px);
+      margin: 36px auto 60px;
+      padding: 44px 48px;
+      position: relative;
+    }
+    /* Corner decorations */
+    .card::before, .card::after {
+      content: '✦';
+      position: absolute;
+      color: var(--gold);
+      font-size: 18px;
+      opacity: 0.4;
+    }
+    .card::before { top: 14px; left: 16px; }
+    .card::after  { top: 14px; right: 16px; }
+
+    .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 30px;
+      font-weight: 400;
+      text-align: center;
+      color: var(--red);
+      margin-bottom: 4px;
+    }
+    .card-title-gu {
+      text-align: center;
+      font-family: 'Tiro Devanagari Sanskrit', serif;
+      font-size: 18px;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .card-subtitle {
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 30px;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── Form ── */
+    .form-group { margin-bottom: 22px; }
+    label {
+      display: block;
+      font-size: 10px;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    label span.required { color: var(--red); margin-left: 2px; }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1px solid #dfc9a4;
+      border-radius: 2px;
+      background: var(--light);
+      font-family: 'Lato', sans-serif;
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    input:focus, textarea:focus {
+      border-color: var(--red);
+      box-shadow: 0 0 0 3px rgba(155,28,28,0.1);
+      background: #fff;
+    }
+    textarea { resize: vertical; min-height: 88px; }
+
+    /* attendance pills */
+    .attendance-group { display: flex; gap: 12px; }
+    .attendance-group input[type="radio"] { display: none; }
+    .attendance-group label {
+      flex: 1;
+      text-align: center;
+      padding: 12px 10px;
+      border: 1px solid #dfc9a4;
+      border-radius: 2px;
+      cursor: pointer;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: var(--light);
+      transition: all 0.2s;
+      margin-bottom: 0;
+    }
+    .attendance-group input[type="radio"]:checked + label {
+      background: var(--red);
+      border-color: var(--red);
+      color: #fff;
+    }
+    .attendance-group label:hover { border-color: var(--gold); background: #fff8ee; }
+
+    /* guest counter */
+    .counter-row { display: flex; align-items: center; gap: 14px; }
+    .counter-btn {
+      width: 36px; height: 36px;
+      border: 1px solid #dfc9a4;
+      border-radius: 2px;
+      background: var(--light);
+      cursor: pointer;
+      font-size: 18px;
+      color: var(--muted);
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+    .counter-btn:hover { border-color: var(--gold); background: #fff8ee; color: var(--red); }
+    .counter-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    .counter-display {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--red);
+      min-width: 30px;
+      text-align: center;
+    }
+
+    /* hidden section */
+    #attending-section { display: none; }
+
+    /* submit */
+    .btn-submit {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, var(--maroon), var(--red));
+      border: none;
+      border-radius: 2px;
+      color: #fff;
+      font-family: 'Lato', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.25s;
+      margin-top: 8px;
+    }
+    .btn-submit:hover {
+      background: linear-gradient(135deg, #5a0808, var(--maroon));
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(122,13,13,0.35);
+    }
+    .btn-submit:active { transform: translateY(0); }
+    .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+    /* spinner */
+    .spinner {
+      display: inline-block;
+      width: 13px; height: 13px;
+      border: 2px solid rgba(255,255,255,0.4);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* error banner */
+    #error-banner {
+      display: none;
+      background: #fff0f0;
+      border: 1px solid #f5b8b8;
+      border-radius: 2px;
+      padding: 11px 15px;
+      font-size: 13px;
+      color: #9b1c1c;
+      margin-bottom: 20px;
+    }
+
+    /* success */
+    #success-msg {
+      display: none;
+      text-align: center;
+      padding: 20px 0 10px;
+    }
+    .success-icon { font-size: 52px; margin-bottom: 6px; }
+    #success-msg h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 30px;
+      font-weight: 400;
+      color: var(--red);
+      margin: 8px 0 4px;
+    }
+    .success-gu {
+      font-family: 'Tiro Devanagari Sanskrit', serif;
+      font-size: 16px;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    #success-msg p { font-size: 14px; color: var(--muted); line-height: 1.8; }
+
+    /* map link */
+    .map-link-row {
+      text-align: center;
+      margin-top: 26px;
+      padding-top: 26px;
+      border-top: 1px solid #f0e0c8;
+    }
+    .map-link-row p { font-size: 12px; color: #9a7060; margin-bottom: 10px; letter-spacing: 0.3px; }
+    .map-btn {
+      display: inline-block;
+      padding: 10px 28px;
+      border: 1px solid var(--gold);
+      border-radius: 2px;
+      color: var(--maroon);
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .map-btn:hover { background: var(--red); border-color: var(--red); color: #fff; }
+
+    /* bottom band */
+    .bottom-band {
+      width: 100%;
+      background: var(--red);
+      text-align: center;
+      padding: 14px;
+      font-size: 13px;
+      color: rgba(255,230,170,0.8);
+      font-family: 'Tiro Devanagari Sanskrit', serif;
+      letter-spacing: 1px;
+    }
+
+    @media (max-width: 520px) {
+      .card { padding: 32px 22px; }
+      .attendance-group { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-band"></div>
+
+  <!-- Hero -->
+  <header class="hero">
+    <span class="om-symbol">ॐ</span>
+    <div class="ganesh-line">Shree Ganeshay Namah · શ્રી ગણેશાય નમઃ</div>
+
+    <div class="hero-names">
+      Hinal <span class="hero-amp">&amp;</span> Deep
+    </div>
+
+    <div class="divider-ornament">🪷</div>
+
+    <div class="hero-sub">
+      Shubh Vivah — સ્વાગત છે · You are warmly invited to celebrate their auspicious union
+    </div>
+
+    <div class="event-details">
+      <div class="detail-item">
+        <span class="detail-icon">📅</span>
+        <span class="detail-label">Date</span>
+        <span class="detail-value">Sunday, 3 May 2026</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-icon">🕠</span>
+        <span class="detail-label">Time · સમય</span>
+        <span class="detail-value">5:30 PM</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-icon">📍</span>
+        <span class="detail-label">Venue · સ્થળ</span>
+        <span class="detail-value">118 Pictou Cres, Stittsville, ON</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Phera strip -->
+  <div class="phera-strip">
+    ✦ &nbsp; Saat Phera · સાત ફેરા &nbsp; ✦ &nbsp; Mangalphera · Jai Shri Krishna &nbsp; ✦
+  </div>
+
+  <!-- RSVP Card -->
+  <main class="card">
+    <div id="form-wrapper">
+      <div class="card-title-gu">કૃપા કરીને જવાબ આપો</div>
+      <h2 class="card-title">Kindly Reply</h2>
+      <p class="card-subtitle">Please respond by April 25, 2026</p>
+
+      <div id="error-banner"></div>
+
+      <form id="rsvp-form" novalidate>
+
+        <!-- Full Name -->
+        <div class="form-group">
+          <label for="full-name">Full Name · નામ <span class="required">*</span></label>
+          <input type="text" id="full-name" name="full_name" placeholder="Your full name" required />
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Email Address · ઇ-મેઇલ</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" />
+        </div>
+
+        <!-- Phone -->
+        <div class="form-group">
+          <label for="phone">Phone Number · ફોન</label>
+          <input type="tel" id="phone" name="phone" placeholder="+1 (613) 000-0000" />
+        </div>
+
+        <!-- Attendance -->
+        <div class="form-group">
+          <label>Will you attend? · શું તમે આવશો? <span class="required">*</span></label>
+          <div class="attendance-group">
+            <input type="radio" id="attend-yes" name="attendance" value="yes" required />
+            <label for="attend-yes">🪷 Joyfully Accepts · હા, ઉત્સાહથી</label>
+
+            <input type="radio" id="attend-no" name="attendance" value="no" />
+            <label for="attend-no">🙏 Regretfully Declines · માફ કરશો</label>
+          </div>
+        </div>
+
+        <!-- Guest count — shown only when attending -->
+        <div id="attending-section">
+          <div class="form-group">
+            <label>Number of Guests · મહેમાનો (including yourself)</label>
+            <div class="counter-row">
+              <button type="button" class="counter-btn" id="dec-btn">−</button>
+              <span class="counter-display" id="guest-count">1</span>
+              <button type="button" class="counter-btn" id="inc-btn">+</button>
+            </div>
+            <input type="hidden" id="guest-count-input" name="guest_count" value="1" />
+          </div>
+        </div>
+
+        <!-- Message -->
+        <div class="form-group">
+          <label for="message">
+            Message to the Couple · સંદેશ
+            <span style="color:#a07050;font-size:9px;"> (optional)</span>
+          </label>
+          <textarea id="message" name="message" placeholder="Leave your warm blessings here… આશીર્વાદ આપો…"></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit" id="submit-btn">
+          🙏 &nbsp;Send RSVP · RSVP મોકલો
+        </button>
+      </form>
+
+      <!-- Map -->
+      <div class="map-link-row">
+        <p>🗺 View the venue on Google Maps · સ્થળ જુઓ</p>
+        <a
+          class="map-btn"
+          href="https://www.google.com/maps/search/?api=1&query=118+Pictou+Cres+Stittsville+ON+K2V+0R2"
+          target="_blank"
+          rel="noopener noreferrer"
+        >Get Directions · દિશા મેળવો</a>
+      </div>
+    </div>
+
+    <!-- Success state -->
+    <div id="success-msg">
+      <div class="success-icon">🪷</div>
+      <h3>Jay Shri Krishna!</h3>
+      <div class="success-gu">જય શ્રી કૃષ્ણ</div>
+      <p id="success-text"></p>
+    </div>
+  </main>
+
+  <div class="bottom-band">
+    ॐ · શ્રી ગણેશાય નમઃ · Shubh Mangal Savdhan · ॐ
+  </div>
+
+  <script>
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzYv0M7XAfnM7TQ2W75cEhhEseQZRUD7FZ_TJZcpFvAy1-2DDofTBkydp9eLTNF-dz0/exec';
+
+    // Show / hide attending section
+    document.querySelectorAll('input[name="attendance"]').forEach(radio => {
+      radio.addEventListener('change', () => {
+        document.getElementById('attending-section').style.display =
+          radio.value === 'yes' ? 'block' : 'none';
+      });
+    });
+
+    // Guest counter — no upper limit
+    let guestCount = 1;
+    const display = document.getElementById('guest-count');
+    const hidden  = document.getElementById('guest-count-input');
+    const decBtn  = document.getElementById('dec-btn');
+
+    decBtn.disabled = true;
+
+    document.getElementById('inc-btn').addEventListener('click', () => {
+      guestCount++;
+      display.textContent = guestCount;
+      hidden.value = guestCount;
+      decBtn.disabled = false;
+    });
+    decBtn.addEventListener('click', () => {
+      if (guestCount > 1) {
+        guestCount--;
+        display.textContent = guestCount;
+        hidden.value = guestCount;
+        if (guestCount === 1) decBtn.disabled = true;
+      }
+    });
+
+    // Form submission
+    document.getElementById('rsvp-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const name       = document.getElementById('full-name').value.trim();
+      const email      = document.getElementById('email').value.trim();
+      const attendance = document.querySelector('input[name="attendance"]:checked');
+
+      document.getElementById('error-banner').style.display = 'none';
+
+      if (!name)       { showError('Please enter your full name. · કૃપા કરીને નામ દાખલ કરો.'); return; }
+      if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showError('Please enter a valid email address.'); return;
+      }
+      if (!attendance) { showError('Please indicate whether you will attend. · કૃપા કરીને જણાવો.'); return; }
+
+      const attending = attendance.value === 'yes';
+      const count     = parseInt(hidden.value, 10);
+      const message   = document.getElementById('message').value.trim();
+      const phone     = document.getElementById('phone').value.trim();
+
+      const submitBtn = document.getElementById('submit-btn');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="spinner"></span>Sending…';
+
+      const payload = {
+        timestamp:   new Date().toLocaleString('en-CA', { timeZone: 'America/Toronto' }),
+        full_name:   name,
+        email:       email,
+        phone:       phone,
+        attendance:  attending ? 'Attending' : 'Not Attending',
+        guest_count: attending ? count : 0,
+        message:     message
+      };
+
+      try {
+        await fetch(SCRIPT_URL, {
+          method:  'POST',
+          mode:    'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify(payload)
+        });
+        showSuccess(name, attending, count);
+      } catch (err) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '🙏 &nbsp;Send RSVP · RSVP મોકલો';
+        showError('Something went wrong. Please try again. · ફરી પ્રયાસ કરો.');
+      }
+    });
+
+    function showError(msg) {
+      const b = document.getElementById('error-banner');
+      b.textContent = msg;
+      b.style.display = 'block';
+      b.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function showSuccess(name, attending, count) {
+      const t = document.getElementById('success-text');
+      if (attending) {
+        t.innerHTML =
+          `We are so blessed that <strong>${name}</strong> will join us on May 3rd!<br>
+           We have noted <strong>${count} guest${count !== 1 ? 's' : ''}</strong>.<br><br>
+           આપ સૌ નો ખૂબ ખૂબ આભાર 🙏`;
+      } else {
+        t.innerHTML =
+          `We will miss you, <strong>${name}</strong>.<br>
+           Thank you for letting us know.<br><br>
+           આપ ના આશીર્વાદ સાથે છો 🙏`;
+      }
+      document.getElementById('form-wrapper').style.display = 'none';
+      document.getElementById('success-msg').style.display  = 'block';
+    }
+  </script>
+</body>
+</html>
