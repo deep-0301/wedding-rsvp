@@ -4,8 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hinal & Deep — Shubh Vivah RSVP</title>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Lato:wght@300;400&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Lato:wght@300;400&display=swap');
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -31,7 +32,6 @@
       align-items: center;
     }
 
-    /* ── Decorative top border ── */
     .top-band {
       width: 100%;
       height: 8px;
@@ -44,7 +44,6 @@
       );
     }
 
-    /* ── Hero ── */
     .hero {
       width: 100%;
       background: linear-gradient(160deg, #7a0d0d 0%, #9b1c1c 45%, #b52020 100%);
@@ -53,8 +52,6 @@
       position: relative;
       overflow: hidden;
     }
-
-    /* Mandala / lotus watermark */
     .hero::before {
       content: '🪷';
       position: absolute;
@@ -67,7 +64,6 @@
     }
 
     .om-symbol {
-      font-family: 'Tiro Devanagari Sanskrit', serif;
       font-size: clamp(28px, 5vw, 42px);
       color: var(--gold);
       letter-spacing: 2px;
@@ -75,13 +71,12 @@
       display: block;
     }
     .ganesh-line {
-      font-size: 12px;
+      font-size: 11px;
       letter-spacing: 3px;
       text-transform: uppercase;
       color: rgba(255,210,120,0.75);
       margin-bottom: 18px;
     }
-
     .hero-names {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(40px, 8vw, 74px);
@@ -97,7 +92,6 @@
       vertical-align: middle;
       margin: 0 14px;
     }
-
     .divider-ornament {
       margin: 16px auto;
       display: flex;
@@ -106,7 +100,6 @@
       gap: 10px;
       color: var(--gold);
       font-size: 18px;
-      opacity: 0.85;
     }
     .divider-ornament::before,
     .divider-ornament::after {
@@ -119,16 +112,13 @@
     .divider-ornament::after {
       background: linear-gradient(to left, transparent, var(--gold));
     }
-
     .hero-sub {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(14px, 2.8vw, 20px);
       font-style: italic;
       color: rgba(255,240,210,0.9);
-      letter-spacing: 0.5px;
       margin-bottom: 28px;
     }
-
     .event-details {
       display: flex;
       flex-wrap: wrap;
@@ -160,7 +150,6 @@
       color: #fff;
     }
 
-    /* ── Phera strip ── */
     .phera-strip {
       width: 100%;
       background: var(--gold);
@@ -173,7 +162,6 @@
       font-weight: 400;
     }
 
-    /* ── Card ── */
     .card {
       background: #fff;
       border: 1px solid #e8d2b0;
@@ -186,7 +174,6 @@
       padding: 44px 48px;
       position: relative;
     }
-    /* Corner decorations */
     .card::before, .card::after {
       content: '✦';
       position: absolute;
@@ -203,13 +190,6 @@
       font-weight: 400;
       text-align: center;
       color: var(--red);
-      margin-bottom: 4px;
-    }
-    .card-title-gu {
-      text-align: center;
-      font-family: 'Tiro Devanagari Sanskrit', serif;
-      font-size: 18px;
-      color: var(--gold);
       margin-bottom: 6px;
     }
     .card-subtitle {
@@ -220,7 +200,6 @@
       letter-spacing: 0.5px;
     }
 
-    /* ── Form ── */
     .form-group { margin-bottom: 22px; }
     label {
       display: block;
@@ -255,7 +234,6 @@
     }
     textarea { resize: vertical; min-height: 88px; }
 
-    /* attendance pills */
     .attendance-group { display: flex; gap: 12px; }
     .attendance-group input[type="radio"] { display: none; }
     .attendance-group label {
@@ -280,7 +258,6 @@
     }
     .attendance-group label:hover { border-color: var(--gold); background: #fff8ee; }
 
-    /* guest counter */
     .counter-row { display: flex; align-items: center; gap: 14px; }
     .counter-btn {
       width: 36px; height: 36px;
@@ -305,10 +282,8 @@
       text-align: center;
     }
 
-    /* hidden section */
     #attending-section { display: none; }
 
-    /* submit */
     .btn-submit {
       width: 100%;
       padding: 15px;
@@ -333,7 +308,6 @@
     .btn-submit:active { transform: translateY(0); }
     .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
-    /* spinner */
     .spinner {
       display: inline-block;
       width: 13px; height: 13px;
@@ -346,7 +320,6 @@
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* error banner */
     #error-banner {
       display: none;
       background: #fff0f0;
@@ -358,7 +331,6 @@
       margin-bottom: 20px;
     }
 
-    /* success */
     #success-msg {
       display: none;
       text-align: center;
@@ -370,24 +342,17 @@
       font-size: 30px;
       font-weight: 400;
       color: var(--red);
-      margin: 8px 0 4px;
-    }
-    .success-gu {
-      font-family: 'Tiro Devanagari Sanskrit', serif;
-      font-size: 16px;
-      color: var(--gold);
-      margin-bottom: 12px;
+      margin: 8px 0 12px;
     }
     #success-msg p { font-size: 14px; color: var(--muted); line-height: 1.8; }
 
-    /* map link */
     .map-link-row {
       text-align: center;
       margin-top: 26px;
       padding-top: 26px;
       border-top: 1px solid #f0e0c8;
     }
-    .map-link-row p { font-size: 12px; color: #9a7060; margin-bottom: 10px; letter-spacing: 0.3px; }
+    .map-link-row p { font-size: 12px; color: #9a7060; margin-bottom: 10px; }
     .map-btn {
       display: inline-block;
       padding: 10px 28px;
@@ -402,7 +367,6 @@
     }
     .map-btn:hover { background: var(--red); border-color: var(--red); color: #fff; }
 
-    /* bottom band */
     .bottom-band {
       width: 100%;
       background: var(--red);
@@ -410,7 +374,6 @@
       padding: 14px;
       font-size: 13px;
       color: rgba(255,230,170,0.8);
-      font-family: 'Tiro Devanagari Sanskrit', serif;
       letter-spacing: 1px;
     }
 
@@ -424,10 +387,9 @@
 
   <div class="top-band"></div>
 
-  <!-- Hero -->
   <header class="hero">
     <span class="om-symbol">ॐ</span>
-    <div class="ganesh-line">Shree Ganeshay Namah · શ્રી ગણેશાય નમઃ</div>
+    <div class="ganesh-line">Shree Ganeshay Namah</div>
 
     <div class="hero-names">
       Hinal <span class="hero-amp">&amp;</span> Deep
@@ -436,7 +398,7 @@
     <div class="divider-ornament">🪷</div>
 
     <div class="hero-sub">
-      Shubh Vivah — સ્વાગત છે · You are warmly invited to celebrate their auspicious union
+      Shubh Vivah — You are warmly invited to celebrate their auspicious union
     </div>
 
     <div class="event-details">
@@ -447,26 +409,23 @@
       </div>
       <div class="detail-item">
         <span class="detail-icon">🕠</span>
-        <span class="detail-label">Time · સમય</span>
+        <span class="detail-label">Time</span>
         <span class="detail-value">5:30 PM</span>
       </div>
       <div class="detail-item">
         <span class="detail-icon">📍</span>
-        <span class="detail-label">Venue · સ્થળ</span>
+        <span class="detail-label">Venue</span>
         <span class="detail-value">118 Pictou Cres, Stittsville, ON</span>
       </div>
     </div>
   </header>
 
-  <!-- Phera strip -->
   <div class="phera-strip">
-    ✦ &nbsp; Saat Phera · સાત ફેરા &nbsp; ✦ &nbsp; Mangalphera · Jai Shri Krishna &nbsp; ✦
+    ✦ &nbsp; Saat Phera &nbsp; ✦ &nbsp; Mangalphera &nbsp; ✦ &nbsp; Jai Shri Krishna &nbsp; ✦
   </div>
 
-  <!-- RSVP Card -->
   <main class="card">
     <div id="form-wrapper">
-      <div class="card-title-gu">કૃપા કરીને જવાબ આપો</div>
       <h2 class="card-title">Kindly Reply</h2>
       <p class="card-subtitle">Please respond by April 25, 2026</p>
 
@@ -474,40 +433,34 @@
 
       <form id="rsvp-form" novalidate>
 
-        <!-- Full Name -->
         <div class="form-group">
-          <label for="full-name">Full Name · નામ <span class="required">*</span></label>
+          <label for="full-name">Full Name <span class="required">*</span></label>
           <input type="text" id="full-name" name="full_name" placeholder="Your full name" required />
         </div>
 
-        <!-- Email -->
         <div class="form-group">
-          <label for="email">Email Address · ઇ-મેઇલ</label>
+          <label for="email">Email Address</label>
           <input type="email" id="email" name="email" placeholder="you@example.com" />
         </div>
 
-        <!-- Phone -->
         <div class="form-group">
-          <label for="phone">Phone Number · ફોન</label>
+          <label for="phone">Phone Number</label>
           <input type="tel" id="phone" name="phone" placeholder="+1 (613) 000-0000" />
         </div>
 
-        <!-- Attendance -->
         <div class="form-group">
-          <label>Will you attend? · શું તમે આવશો? <span class="required">*</span></label>
+          <label>Will you attend? <span class="required">*</span></label>
           <div class="attendance-group">
             <input type="radio" id="attend-yes" name="attendance" value="yes" required />
-            <label for="attend-yes">🪷 Joyfully Accepts · હા, ઉત્સાહથી</label>
-
+            <label for="attend-yes">🪷 Joyfully Accepts</label>
             <input type="radio" id="attend-no" name="attendance" value="no" />
-            <label for="attend-no">🙏 Regretfully Declines · માફ કરશો</label>
+            <label for="attend-no">🙏 Regretfully Declines</label>
           </div>
         </div>
 
-        <!-- Guest count — shown only when attending -->
         <div id="attending-section">
           <div class="form-group">
-            <label>Number of Guests · મહેમાનો (including yourself)</label>
+            <label>Number of Guests (including yourself)</label>
             <div class="counter-row">
               <button type="button" class="counter-btn" id="dec-btn">−</button>
               <span class="counter-display" id="guest-count">1</span>
@@ -517,49 +470,47 @@
           </div>
         </div>
 
-        <!-- Message -->
         <div class="form-group">
-          <label for="message">
-            Message to the Couple · સંદેશ
-            <span style="color:#a07050;font-size:9px;"> (optional)</span>
-          </label>
-          <textarea id="message" name="message" placeholder="Leave your warm blessings here… આશીર્વાદ આપો…"></textarea>
+          <label for="message">Message to the Couple <span style="color:#a07050;font-size:9px;">(optional)</span></label>
+          <textarea id="message" name="message" placeholder="Leave your warm blessings here…"></textarea>
         </div>
 
         <button type="submit" class="btn-submit" id="submit-btn">
-          🙏 &nbsp;Send RSVP · RSVP મોકલો
+          🙏 &nbsp; Send RSVP
         </button>
       </form>
 
-      <!-- Map -->
       <div class="map-link-row">
-        <p>🗺 View the venue on Google Maps · સ્થળ જુઓ</p>
+        <p>View the venue on Google Maps</p>
         <a
           class="map-btn"
           href="https://www.google.com/maps/search/?api=1&query=118+Pictou+Cres+Stittsville+ON+K2V+0R2"
           target="_blank"
           rel="noopener noreferrer"
-        >Get Directions · દિશા મેળવો</a>
+        >Get Directions</a>
       </div>
     </div>
 
-    <!-- Success state -->
     <div id="success-msg">
       <div class="success-icon">🪷</div>
       <h3>Jay Shri Krishna!</h3>
-      <div class="success-gu">જય શ્રી કૃષ્ણ</div>
       <p id="success-text"></p>
     </div>
   </main>
 
   <div class="bottom-band">
-    ॐ · શ્રી ગણેશાય નમઃ · Shubh Mangal Savdhan · ॐ
+    ॐ &nbsp;·&nbsp; Shree Ganeshay Namah &nbsp;·&nbsp; Shubh Mangal Savdhan &nbsp;·&nbsp; ॐ
   </div>
 
   <script>
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzYv0M7XAfnM7TQ2W75cEhhEseQZRUD7FZ_TJZcpFvAy1-2DDofTBkydp9eLTNF-dz0/exec';
+    // ── EmailJS config — fill these in after setup ──
+    const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';
+    const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';
+    const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
 
-    // Show / hide attending section
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+
+    // Show / hide guest counter
     document.querySelectorAll('input[name="attendance"]').forEach(radio => {
       radio.addEventListener('change', () => {
         document.getElementById('attending-section').style.display =
@@ -572,7 +523,6 @@
     const display = document.getElementById('guest-count');
     const hidden  = document.getElementById('guest-count-input');
     const decBtn  = document.getElementById('dec-btn');
-
     decBtn.disabled = true;
 
     document.getElementById('inc-btn').addEventListener('click', () => {
@@ -600,11 +550,11 @@
 
       document.getElementById('error-banner').style.display = 'none';
 
-      if (!name)       { showError('Please enter your full name. · કૃપા કરીને નામ દાખલ કરો.'); return; }
+      if (!name)       { showError('Please enter your full name.'); return; }
       if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         showError('Please enter a valid email address.'); return;
       }
-      if (!attendance) { showError('Please indicate whether you will attend. · કૃપા કરીને જણાવો.'); return; }
+      if (!attendance) { showError('Please indicate whether you will attend.'); return; }
 
       const attending = attendance.value === 'yes';
       const count     = parseInt(hidden.value, 10);
@@ -615,28 +565,23 @@
       submitBtn.disabled = true;
       submitBtn.innerHTML = '<span class="spinner"></span>Sending…';
 
-      const payload = {
-        timestamp:   new Date().toLocaleString('en-CA', { timeZone: 'America/Toronto' }),
-        full_name:   name,
-        email:       email,
-        phone:       phone,
+      const templateParams = {
+        from_name:   name,
+        email:       email || 'Not provided',
+        phone:       phone || 'Not provided',
         attendance:  attending ? 'Attending' : 'Not Attending',
-        guest_count: attending ? count : 0,
-        message:     message
+        guest_count: attending ? count : 'N/A',
+        message:     message || 'No message',
+        timestamp:   new Date().toLocaleString('en-CA', { timeZone: 'America/Toronto' })
       };
 
       try {
-        await fetch(SCRIPT_URL, {
-          method:  'POST',
-          mode:    'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body:    JSON.stringify(payload)
-        });
+        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
         showSuccess(name, attending, count);
       } catch (err) {
         submitBtn.disabled = false;
-        submitBtn.innerHTML = '🙏 &nbsp;Send RSVP · RSVP મોકલો';
-        showError('Something went wrong. Please try again. · ફરી પ્રયાસ કરો.');
+        submitBtn.innerHTML = '🙏 &nbsp; Send RSVP';
+        showError('Something went wrong. Please try again.');
       }
     });
 
@@ -653,12 +598,11 @@
         t.innerHTML =
           `We are so blessed that <strong>${name}</strong> will join us on May 3rd!<br>
            We have noted <strong>${count} guest${count !== 1 ? 's' : ''}</strong>.<br><br>
-           આપ સૌ નો ખૂબ ખૂબ આભાર 🙏`;
+           We can't wait to celebrate with you. 🙏`;
       } else {
         t.innerHTML =
           `We will miss you, <strong>${name}</strong>.<br>
-           Thank you for letting us know.<br><br>
-           આપ ના આશીર્વાદ સાથે છો 🙏`;
+           Thank you for letting us know. You will be in our prayers. 🙏`;
       }
       document.getElementById('form-wrapper').style.display = 'none';
       document.getElementById('success-msg').style.display  = 'block';
